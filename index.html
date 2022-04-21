@@ -12,133 +12,40 @@
 </head>
 
 <body>
-    <header class="headerNoIndex bg-primary bg-gradient sticky-top">
+    <header class="header bg-warning bg-gradient sticky-top">
         <nav class="navbar navbar-expand-md navbar-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="../index.html"><img class="logo_nav" src="./img/LogoRemaster2.png" alt="" />
+                <a class="navbar-brand" href="./index.html"><img class="logo_nav" src="./img/LogoRemaster2.png" alt="" />
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
           </button>
-                <div class="collapse navbar-collapse justify-content-end text-white" id="collapsibleNavbar">
+                <div class="collapse navbar-collapse justify-content-end text-black" id="collapsibleNavbar">
                     <ul class="navbar-nav align-items-end">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Inicio</a>
+                            <a class="nav-link text-black" href="#">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Servicios</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Empresas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Sobre mí</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Contacto</a>
+                            <a class="nav-link text-black" href="./pages/administrador.html">Administrador</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-black" href="#">Contacto</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <main id="main" class="container-fluid">
-        <div>
-            <h4 class="text-center text-black-50 bg-light">Listado de Quesos</h4>
-        </div>
-        <div class="container-fluid row justify-content-evenly w-100 bg-light bg-opacity-50 p-0 m-0">
-            <div id="quesos" class="col-md-7 col-8 text-center text-black order-1">
-                <table id="tabla" class="table table-bordered">
-                    <thead class="">
-                        <tr class="bg-light">
-                            <th scope="col" class="bg-light">Marca</th>
-                            <th scope="col" class="bg-light">Tipo</th>
-                            <th scope="col" class="bg-light">Precio x kg</th>
-                            <th scope="col" class="bg-light"></th>
-                            <th scope="col" class="bg-light"></th>
-                        </tr>
-                    </thead>
-                    <tbody class="" id="tbody">
-                        <tr class="bg-light">
-                            <td id="marca" class="bg-light"></td>
-                            <td id="tipo" class="bg-light" class="bg-light"></td>
-                            <td id="costo" class="bg-light" class="bg-light"></td>
-                            <td>
-                                <button class="btn btn-warning">
-                    <img src="./img/edit.png" alt="" />
-                  </button>
-                            </td>
-                            <td>
-                                <button class="btn btn-danger">
-                    <img src="./img/delete.png" alt="" />
-                  </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+    <main class="container mainIndex">
+        <div class="row justify-content-center pt-4 container-fluid">
+            <div class="card cardTienda align-middle">
+                <h3 class="cardTitle">Ir a Tienda</h3>
             </div>
-            <div class="col-md-4 col-4">
-                <form id="formulario">
-                    <div class="form-group mb-4">
-                        <select class="form-select" id="marca2" type="text" class="form-control" aria-label="Default select example">
-                <option selected>Elegí la marca</option>
-                <option value="DON ALBERTO">DON ALBERTO</option>
-                <option value="DON ANGEL">DON ANGEL</option>
-                <option value="HG (CAMPO)">HG (CAMPO)</option>
-                <option value="LA CHACRA">LA CHACRA</option>
-                <option value="TREGAR">TREGAR</option>
-                <option value="UBIERGO">UBIERGO</option>
-              </select>
-                    </div>
-                    <div class="form-group mb-4">
-                        <select class="form-select" id="tipo2" type="text" class="form-control" aria-label="Default select example">
-                <option selected>Elegí el producto</option>
-                <option value="AZUL">AZUL</option>
-                <option value="BARRA">BARRA</option>
-                <option value="CHEDDAR">CHEDDAR</option>
-                <option value="CREMA EN POUCH">CREMA EN POUCH</option>
-                <option value="CREMOSO">CREMOSO</option>
-                <option value="CREMOSO POR 4KG">CREMOSO POR 4KG</option>
-                <option value="DULCE DE LECHE 1KG REPOSTERO">
-                  DULCE DE LECHE 1KG REPOSTERO
-                </option>
-                <option value="FONTINA">FONTINA</option>
-                <option value="HOLANDA">HOLANDA</option>
-                <option value="MOZARELLA">MOZARELLA</option>
-                <option value="PATEGRAS">PATEGRAS</option>
-                <option value="POR SALUT POR 4KG">POR SALUT POR 4KG</option>
-                <option value="PORT SALUT">PORT SALUT</option>
-                <option value="PORT SALUT LIGHT">PORT SALUT LIGHT</option>
-                <option value="REGGIANITO">REGGIANITO</option>
-                <option value="RICOTTA">RICOTTA</option>
-                <option value="SABORIZADO">SABORIZADO</option>
-                <option value="SABORIZADO DE CHIMICHURRI">
-                  SABORIZADO DE CHIMICHURRI
-                </option>
-                <option value="SABORIZADO PIMIENTA">SABORIZADO PIMIENTA</option>
-                <option value="SALAME DE METRO 700G">
-                  SALAME DE METRO 700G
-                </option>
-                <option value="SARDO">SARDO</option>
-                <option value="SARDO DE CABRA">SARDO DE CABRA</option>
-                <option value="SARDO ESTACIONADO">SARDO ESTACIONADO</option>
-                <option value="SARDO FRESCO">SARDO FRESCO</option>
-                <option value="TYBO">TYBO</option>
-              </select>
-                    </div>
-                    <div class="form-group mb-4">
-                        <input type="number" id="costo2" class="form-control" placeholder="Ingresá el costo" required />
-                    </div>
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Agregar</button>
-                    </div>
-                </form>
+            <div class="card cardAdmin">
+                <h3 class="cardTitle">Sección Administrador</h3>
             </div>
         </div>
-        <div id="final" class="bg-light bg-opacity-50">
-            <p></p>
-        </div>
-        <script src="./stock.js"></script>
     </main>
     <footer></footer>
     <!-- JavaScript Bundle with Popper -->

@@ -4,13 +4,182 @@
     box-sizing: border-box;
 }
 
-main {
+body {
     height: 100vh;
-    background-image: url(../img/fondo_quesos_2.jpg), url(../img/fondo_quesos.jpg);
+    background-image: url(../img/fondo/fondo_quesos_2.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 a {
     text-decoration: none;
+}
+
+.mainIndex {
+    height: 100vh;
+    background-color: rgba(243, 232, 85, 0.726);
+}
+
+.card {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    margin: 2rem 3rem;
+    border-radius: 3rem;
+    height: 15rem;
+    width: 15rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    box-shadow: 1rem 1rem 2rem rgb(131, 125, 45), -1rem -1rem 2rem rgb(131, 125, 45);
+}
+
+.card:hover {
+    box-shadow: -0.5rem -0.5rem 1rem rgb(131, 125, 45) inset;
+}
+
+.cardTitle {
+    border-radius: 4rem;
+    text-align: center;
+    background-color: white;
+}
+
+.cardTienda {
+    background-image: url(../img/fondo/tienda.jpg);
+}
+
+.cardAdmin {
+    background-image: url(../img/fondo/admin.jpg);
+}
+
+
+/* Efectos de las cards */
+
+figure.imagenes {
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    margin: 0px;
+    min-width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    color: #000000;
+    text-align: center;
+}
+
+figure.imagenes * {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: all 0.6s ease;
+    transition: all 0.6s ease;
+}
+
+figure.imagenes img {
+    opacity: 1;
+    width: 100%;
+    -webkit-transition: opacity 0.35s;
+    transition: opacity 0.35s;
+}
+
+figure.imagenes:after {
+    background: #f0e985;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    content: "";
+    opacity: 0.75;
+    -webkit-transform: skew(-45deg) scaleX(0);
+    transform: skew(-45deg) scaleX(0);
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+figure.imagenes figcaption {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+figure.imagenes h2,
+figure.imagenes p {
+    margin: 0;
+    width: 100%;
+    opacity: 0;
+}
+
+figure.imagenes h2 {
+    padding: 0 30px;
+    display: inline-block;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+figure.imagenes p {
+    padding: 0 50px;
+    font-size: 0.8em;
+    font-weight: 500;
+}
+
+figure.imagenes a {
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    z-index: 1;
+}
+
+figure.imagenes:hover:after,
+figure.imagenes.hover:after {
+    -webkit-transform: skew(-45deg) scaleX(1);
+    transform: skew(-45deg) scaleX(1);
+    transition: all 400ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+figure.imagenes:hover figcaption h2,
+figure.imagenes.hover figcaption h2,
+figure.imagenes:hover figcaption p,
+figure.imagenes.hover figcaption p {
+    -webkit-transform: translate3d(0%, 0%, 0);
+    transform: translate3d(0%, 0%, 0);
+    -webkit-transition-delay: 0.2s;
+    transition-delay: 0.2s;
+}
+
+figure.imagenes:hover figcaption h2,
+figure.imagenes.hover figcaption h2 {
+    opacity: 1;
+}
+
+figure.imagenes:hover figcaption p,
+figure.imagenes.hover figcaption p {
+    opacity: 0.7;
+}
+
+
+/* Fin de efecto de cards */
+
+#rowFormu {
+    justify-content: center;
+}
+
+#formulario {
+    width: 50%;
+}
+
+@media (min-width: 768px) {
+    #rowFormu {
+        justify-content: left;
+        width: 100%;
+    }
+    #formulario {
+        width: 100%;
+    }
 }
