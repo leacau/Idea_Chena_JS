@@ -6,15 +6,15 @@ function agregarATienda() {
     contenedor.innerHTML = "";
 
     for (let i = 0; i < listaProductos.length; i++) {
+        let marca = listaProductos[i].marca;
         let tipo = listaProductos[i].tipo;
         let descrip = listaProductos[i].descrip;
-        let id = listaProductos[i].id;
 
         contenedor.innerHTML += `
-        <div class="col-lg-3 col-md-4 col-sm-6">
-        <div id="${i}2" class="card m-3 p-0" style="width: auto">
+    <div class="col-8 col-sm-6 col-md-4 m-0 p-0 colTiendaCard">
+        <div id="${i}2" class="card m-3 p-0 tiendaCard">
             <figure class="imagenes">
-                <img src="../img/quesos/${id}" alt="foto de un queso azul, similar al Roquefort" />
+                <img src="../img/quesos/${marca}/${tipo}.jpg" alt="" />
                 <figcaption>
                     <h2>${tipo}</h2>
                     <p id="descrip" class="text-black">${descrip}</p>

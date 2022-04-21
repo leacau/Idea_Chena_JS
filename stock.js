@@ -29,7 +29,21 @@ document.getElementById("formulario").addEventListener("submit", (e) => {
 
     QUESOS.push(new Queso(marca, tipo, costo, descrip, cantidad));
 
-    localStorage.setItem("QuesosEnLS", JSON.stringify(QUESOS));
+    if (localStorage.length === 0) {
+        localStorage.setItem("QuesosEnLS", JSON.stringify(QUESOS));
+    } else {
+        let listaProductos = JSON.parse(localStorage.getItem("QuesosEnLS"));
+        let elemento = listaProductos.find((elemento) => elemento.id === id);
+        if (elemento == null) {
+            localStorage.setItem("QuesosEnLS", JSON.stringify(QUESOS));
+
+            console.log("Dio NULL");
+        } else {
+            console.log("NO DIO NULL");
+            console.log(elemento.cantidad);
+            modificarCantidadProducto(id, parseFloat(cantidad), "QuesosEnLS");
+        }
+    }
 
     ingresarProductoHTML();
 
@@ -56,8 +70,8 @@ function ingresarProductoHTML() {
             <td id="tipo" class="bg-light">${tipo}</td>
             <td id="costo" class="bg-light">${costo}</td>
             <td id="cantidad" class="bg-light">${cantidad}</td>
-            <td class="bg-light"><button class="btn btn-warning" onClick="modificarProducto(${i})"><img src="./img/botones/edit.png"alt=""/></button></td>
-            <td class = "bg-light"><button class="btn btn-danger" onClick="eliminarProducto(${i})"><img src="./img/botones/delete.png" alt=""/></button></td>
+            <td class="bg-light"><button class="btn btn-warning" onClick="modificarProducto(${i})"><img src="../img/botones/edit.png"alt=""/></button></td>
+            <td class = "bg-light"><button class="btn btn-danger" onClick="eliminarProducto(${i})"><img src="../img/botones/delete.png" alt=""/></button></td>
         </tr>
         `;
     }
@@ -101,4 +115,13 @@ function eliminarProducto(i) {
     localStorage.setItem("QuesosEnLS", JSON.stringify(listaProductos));
 
     QUESOS.splice(i, 1);
+}
+
+function modificarCantidadProducto(id, cantidadProducto, nombreArreglo) {
+    let listaProductos = JSON.parse(localStorage.getItem(nombreArreglo));
+    let elemento = listaProductos.find((elemento) => elemento.id === id);
+    let cantidadTotal =
+        parseFloat(elemento.cantidad) + parseFloat(cantidadProducto);
+    elemento.cantidad = cantidadTotal;
+    localStorage.setItem(nombreArreglo, JSON.stringify(listaProductos));
 }
