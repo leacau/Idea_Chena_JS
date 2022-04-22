@@ -1,3 +1,19 @@
+window.onload = logueo();
+
+function logueo(usuario, pass) {
+    /*  alert("Para utilizar esta sección debes tener registro"); */
+    tomarBBDD();
+}
+
+function tomarBBDD() {
+    let listaProductos = JSON.parse(localStorage.getItem("QuesosEnLS"));
+    if (listaProductos == null) {
+        const QUESOS = [];
+    } else {
+        ingresarProductoHTML(listaProductos);
+    }
+}
+
 //construcción del producto
 
 class Queso {
@@ -11,8 +27,6 @@ class Queso {
         this.vendido = false;
     }
 }
-
-// definición del array
 const QUESOS = [];
 
 // agregar productos al arreglo y guardarlo en localStorage
@@ -44,24 +58,21 @@ document.getElementById("formulario").addEventListener("submit", (e) => {
             modificarCantidadProducto(id, parseFloat(cantidad), "QuesosEnLS");
         }
     }
-
-    ingresarProductoHTML();
-
+    tomarBBDD();
     document.getElementById("formulario").reset();
 });
 
 //creación de funciones para el mantenimiento del stock
 
-function ingresarProductoHTML() {
+function ingresarProductoHTML(arreglo) {
     let contenedor = document.getElementById("tbody");
     contenedor.innerHTML = "";
-
-    for (let i = 0; i < QUESOS.length; i++) {
-        let marca = QUESOS[i].marca;
-        let tipo = QUESOS[i].tipo;
-        let costo = QUESOS[i].costo;
-        let cantidad = QUESOS[i].cantidad;
-        let id = QUESOS[i].id;
+    for (let i = 0; i < arreglo.length; i++) {
+        let marca = arreglo[i].marca;
+        let tipo = arreglo[i].tipo;
+        let costo = arreglo[i].costo;
+        let cantidad = arreglo[i].cantidad;
+        let id = arreglo[i].id;
 
         contenedor.innerHTML += `
         
@@ -78,15 +89,17 @@ function ingresarProductoHTML() {
 }
 
 function modificarProducto(i) {
-    let id = QUESOS[i].id;
+    let listaProductos = JSON.parse(localStorage.getItem("QuesosEnLS"));
+    let id = listaProductos[i].id;
+    let producto = listaProductos.find((elemento) => elemento.id === `${id}`);
     let contenedor = document.getElementById(`${id}`);
     contenedor.innerHTML = "";
 
-    let marca = QUESOS[i].marca;
-    let tipo = QUESOS[i].tipo;
-    let costo = QUESOS[i].costo;
-    let cantidad = QUESOS[i].cantidad;
-    let descrip = QUESOS[i].descrip;
+    let marca = listaProductos[i].marca;
+    let tipo = listaProductos[i].tipo;
+    let costo = listaProductos[i].costo;
+    let cantidad = listaProductos[i].cantidad;
+    let descrip = listaProductos[i].descrip;
 
     document.getElementById("marca2").value = marca;
     document.getElementById("tipo2").value = tipo;
@@ -94,14 +107,16 @@ function modificarProducto(i) {
     document.getElementById("cantidad2").value = cantidad;
     document.getElementById("descrip2").value = descrip;
 
-    let listaProductos = JSON.parse(localStorage.getItem("QuesosEnLS"));
-    let producto = listaProductos.find((elemento) => elemento.id === `${id}`);
     producto.marca = marca;
     producto.tipo = tipo;
     producto.costo = costo;
     producto.cantidad = cantidad;
     producto.descrip = descrip;
-    localStorage.setItem("QuesosEnLS", JSON.stringify(listaProductos));
+
+    /*     localStorage.setItem("QuesosEnLS", JSON.stringify(listaProductos));
+     */
+    localStorage.removeItem("QuesosEnLS");
+
     QUESOS.splice(i, 1);
 }
 

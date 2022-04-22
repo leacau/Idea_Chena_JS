@@ -12,7 +12,7 @@
     <title>Venta de quesos</title>
 </head>
 
-<body>
+<body id="bodyAdmin" class="bodyNoIndex">
     <header class="header bg-warning bg-gradient sticky-top">
         <nav class="navbar navbar-expand-md navbar-dark">
             <div class="container-fluid">
@@ -37,8 +37,12 @@
             </div>
         </nav>
     </header>
-    <main id="main" class="container-fluid">
+    <main id="main" class="container-fluid visually-hidden">
         <div>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
             <h4 class="text-center text-black-50 bg-light">Listado de Quesos</h4>
         </div>
         <div class="container-fluid row justify-content-evenly w-100 bg-light bg-opacity-50 p-0 m-0">
@@ -55,24 +59,7 @@
                             <th scope="col" class="bg-light"></th>
                         </tr>
                     </thead>
-                    <tbody class="" id="tbody">
-                        <tr class="bg-light">
-                            <td id="marca" class="bg-light"></td>
-                            <td id="tipo" class="bg-light flex-wrap" class="bg-light"></td>
-                            <td id="costo" class="bg-light" class="bg-light"></td>
-                            <td id="cantidad" class="bg-light" class="bg-light"></td>
-                            <td>
-                                <button class="btn btn-warning">
-                    <img src="../img/botones/edit.png" alt="" />
-                  </button>
-                            </td>
-                            <td>
-                                <button class="btn btn-danger">
-                    <img src="../img/botones/delete.png" alt="" />
-                  </button>
-                            </td>
-                        </tr>
-                    </tbody>
+                    <tbody class="" id="tbody"></tbody>
                 </table>
             </div>
             <!-- //fin de tabla donde se muestran los productos -->

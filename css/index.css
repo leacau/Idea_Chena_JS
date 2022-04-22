@@ -4,20 +4,31 @@
     box-sizing: border-box;
 }
 
-body {
+.bodyNoIndex {
     height: 100vh;
     background-image: url(../img/fondo/fondo_quesos_2.jpg);
     background-repeat: repeat-y;
     background-size: cover;
 }
 
-a {
-    text-decoration: none;
+body {
+    overflow: hidden;
 }
 
-.mainIndex {
-    height: 100vh;
-    background-color: rgba(243, 232, 85, 0.726);
+main {
+    overflow: hidden;
+}
+
+.videoFondo {
+    padding-left: 12rem;
+    padding-right: 12rem;
+    margin: 0;
+    position: absolute;
+    z-index: -3;
+}
+
+a {
+    text-decoration: none;
 }
 
 .colCards {
