@@ -1,5 +1,9 @@
 window.onload = agregarATienda();
 
+alert(
+    "Si la tienda esta vacía, se deben agregar productos desde la sección administrador. Gracias!"
+);
+
 function agregarATienda() {
     let listaProductos = JSON.parse(localStorage.getItem("QuesosEnLS"));
     let contenedor = document.getElementById("cards");
