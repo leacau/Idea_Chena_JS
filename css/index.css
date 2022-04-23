@@ -15,14 +15,6 @@ a {
     background-size: cover;
 }
 
-body {
-    overflow: hidden;
-}
-
-main {
-    overflow: hidden;
-}
-
 .mainIndex {
     display: flex;
     justify-content: center;
@@ -79,10 +71,6 @@ main {
 
 .cardTienda {
     background-image: url(../img/fondo/tienda.jpg);
-}
-
-.cardAdmin {
-    background-image: url(../img/fondo/admin.jpg);
 }
 
 
@@ -213,7 +201,7 @@ figure.imagenes.hover figcaption p {
 }
 
 #formulario {
-    width: 50%;
+    width: 80%;
 }
 
 @media (min-width: 768px) {

@@ -46,21 +46,21 @@
         </div>
         <div class="container-fluid row justify-content-evenly w-100 bg-light bg-opacity-50 p-0 m-0">
             <!-- Tabla donde se muestran los productos -->
-            <div id="quesos" class="col-md-8 text-center text-black order-1">
-                <table id="tabla" class="table table-bordered">
-                    <thead class="">
-                        <tr class="bg-light">
-                            <th scope="col" class="bg-light">Marca</th>
-                            <th scope="col" class="bg-light">Tipo</th>
-                            <th scope="col" class="bg-light">Precio x kg</th>
-                            <th scope="col" class="bg-light">Cantidad</th>
-                            <th scope="col" class="bg-light"></th>
-                            <th scope="col" class="bg-light"></th>
-                        </tr>
-                    </thead>
-                    <tbody class="" id="tbody"></tbody>
-                </table>
-            </div>
+            <!-- <div id="quesos" class="col-md-8 text-center text-black order-1"> -->
+            <table id="tabla" class="table table-responsive table-responsive-md order-1">
+                <thead class="">
+                    <tr class="bg-light">
+                        <th scope="col" class="bg-light">Marca</th>
+                        <th scope="col" class="bg-light">Tipo</th>
+                        <th scope="col" class="bg-light">Precio x kg</th>
+                        <th scope="col" class="bg-light">Cantidad</th>
+                        <th scope="col" class="bg-light"></th>
+                        <th scope="col" class="bg-light"></th>
+                    </tr>
+                </thead>
+                <tbody class="" id="tbody"></tbody>
+            </table>
+            <!--          </div> -->
             <!-- //fin de tabla donde se muestran los productos -->
             <!-- Formulario para agregar productos -->
             <div class="col-md-4">
@@ -107,10 +107,10 @@
                             <textarea name="descripcion" id="descrip2" rows="3" placeholder="ingresá descripción del producto"></textarea>
                         </div>
                         <div class="form-group mb-4">
-                            <input type="number" step="0.01" id="costo2" class="form-control" placeholder="Ingresá el costo" required />
+                            <input type="number" step="0.01" id="costo2" class="form-control precioCantidad" placeholder="Ingresá el costo" required />
                         </div>
                         <div class="form-group mb-4">
-                            <input type="number" step="0.5" id="cantidad2" class="form-control" placeholder="Ingresá la cantidad del producto" required />
+                            <input type="number" step="0.5" id="cantidad2" class="form-control precioCantidad" placeholder="Ingresá la cantidad del producto" required />
                         </div>
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary">Agregar</button>
