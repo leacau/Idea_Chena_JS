@@ -1,7 +1,11 @@
 window.onload = logueo();
 
-function logueo(usuario, pass) {
-    /*  alert("Para utilizar esta sección debes tener registro"); */
+function logueo() {
+    /*     alert("Para utilizar esta sección debes tener registro");
+      let usuario = prompt("Por favor indicá tu nombre de ususario");
+      let pass = prompt("Por favor elegí tu contraseña");
+      localStorage.setItem(usuario, pass); */
+
     tomarBBDD();
 }
 

@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+a {
+    text-decoration: none;
+}
+
 .bodyNoIndex {
     height: 100vh;
     background-image: url(../img/fondo/fondo_quesos_2.jpg);
@@ -19,19 +23,24 @@ main {
     overflow: hidden;
 }
 
+.mainIndex {
+    display: flex;
+    justify-content: center;
+}
+
 .videoFondo {
-    padding-left: 12rem;
-    padding-right: 12rem;
     margin: 0;
+    padding: 0;
     position: absolute;
+    height: auto;
+    min-height: 50px;
+    width: 100vw;
+    filter: opacity(80%);
     z-index: -3;
 }
 
-a {
-    text-decoration: none;
-}
-
 .colCards {
+    top: 0;
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
@@ -41,14 +50,21 @@ a {
     display: flex;
     justify-content: center;
     overflow: hidden;
-    margin: 3rem 0rem;
+    margin: 1rem 0rem;
     border-radius: 3rem;
-    height: 15rem;
-    width: 15rem;
+    height: 13rem;
+    width: 13rem;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     box-shadow: 1rem 1rem 2rem rgb(131, 125, 45), -1rem -1rem 2rem rgb(131, 125, 45);
+}
+
+@media (max-width: 768px) {
+    .cardIndex {
+        height: 10rem;
+        width: 10rem;
+    }
 }
 
 .card:hover {
