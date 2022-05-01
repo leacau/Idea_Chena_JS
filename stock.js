@@ -1,21 +1,19 @@
-window.onload = logueo();
+document.addEventListener("DOMContentLoaded", consultarLogueo());
 
-function logueo() {
-    /*     alert("Para utilizar esta sección debes tener registro");
-      let usuario = prompt("Por favor indicá tu nombre de ususario");
-      let pass = prompt("Por favor elegí tu contraseña");
-      localStorage.setItem(usuario, pass); */
-
-    tomarBBDD();
+function consultarLogueo() {
+    if (sessionStorage.getItem("usuarioLogueado") == "true") {
+        let content = document.getElementById("main");
+        content.classList.remove("visually-hidden");
+        tomarBBDD();
+    } else {
+        alert("Debes loguearte para usar esta página");
+    }
 }
 
 function tomarBBDD() {
+    let QUESOS = [];
     let listaProductos = JSON.parse(localStorage.getItem("QuesosEnLS"));
-    if (listaProductos == null) {
-        const QUESOS = [];
-    } else {
-        ingresarProductoHTML(listaProductos);
-    }
+    listaProductos == null ? (QUESOS = []) : ingresarProductoHTML(listaProductos);
 }
 
 //construcción del producto
@@ -47,7 +45,7 @@ document.getElementById("formulario").addEventListener("submit", (e) => {
 
     QUESOS.push(new Queso(marca, tipo, costo, descrip, cantidad));
 
-    if (localStorage.length === 0) {
+    if (localStorage.getItem("QuesosEnLS") == null) {
         localStorage.setItem("QuesosEnLS", JSON.stringify(QUESOS));
     } else {
         let listaProductos = JSON.parse(localStorage.getItem("QuesosEnLS"));
@@ -93,45 +91,55 @@ function ingresarProductoHTML(arreglo) {
 }
 
 function modificarProducto(i) {
-    let listaProductos = JSON.parse(localStorage.getItem("QuesosEnLS"));
-    let id = listaProductos[i].id;
-    let producto = listaProductos.find((elemento) => elemento.id === `${id}`);
-    let contenedor = document.getElementById(`${id}`);
-    contenedor.innerHTML = "";
+    if (
+        document.getElementById("cantidad2").value != "" ||
+        document.getElementById("costo2").value != ""
+    ) {
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Ya esta modificando otro producto",
+        });
+    } else {
+        let listaProductos = JSON.parse(localStorage.getItem("QuesosEnLS"));
+        let id = listaProductos[i].id;
+        let producto = listaProductos.find((elemento) => elemento.id === `${id}`);
+        let contenedor = document.getElementById(`${id}`);
+        contenedor.innerHTML = "";
 
-    let marca = listaProductos[i].marca;
-    let tipo = listaProductos[i].tipo;
-    let costo = listaProductos[i].costo;
-    let cantidad = listaProductos[i].cantidad;
-    let descrip = listaProductos[i].descrip;
+        let marca = listaProductos[i].marca;
+        let tipo = listaProductos[i].tipo;
+        let costo = listaProductos[i].costo;
+        let cantidad = listaProductos[i].cantidad;
+        let descrip = listaProductos[i].descrip;
 
-    document.getElementById("marca2").value = marca;
-    document.getElementById("tipo2").value = tipo;
-    document.getElementById("costo2").value = costo;
-    document.getElementById("cantidad2").value = cantidad;
-    document.getElementById("descrip2").value = descrip;
+        document.getElementById("marca2").value = marca;
+        document.getElementById("tipo2").value = tipo;
+        document.getElementById("costo2").value = costo;
+        document.getElementById("cantidad2").value = cantidad;
+        document.getElementById("descrip2").value = descrip;
 
-    producto.marca = marca;
-    producto.tipo = tipo;
-    producto.costo = costo;
-    producto.cantidad = cantidad;
-    producto.descrip = descrip;
+        producto.marca = marca;
+        producto.tipo = tipo;
+        producto.costo = costo;
+        producto.cantidad = cantidad;
+        producto.descrip = descrip;
 
-    /*     localStorage.setItem("QuesosEnLS", JSON.stringify(listaProductos));
-     */
-    localStorage.removeItem("QuesosEnLS");
+        localStorage.removeItem("QuesosEnLS");
 
-    QUESOS.splice(i, 1);
+        QUESOS.splice(i, 1);
+    }
 }
 
 function eliminarProducto(i) {
-    let id = QUESOS[i].id;
+    let listaProductos = JSON.parse(localStorage.getItem("QuesosEnLS"));
+    let id = listaProductos[i].id;
     let contenedor = document.getElementById(`${id}`);
     contenedor.innerHTML = "";
 
-    let listaProductos = JSON.parse(localStorage.getItem("QuesosEnLS"));
     listaProductos = listaProductos.filter((element) => element.id != `${id}`);
     localStorage.setItem("QuesosEnLS", JSON.stringify(listaProductos));
+    ingresarProductoHTML(listaProductos);
 
     QUESOS.splice(i, 1);
 }

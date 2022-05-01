@@ -1,10 +1,13 @@
-window.onload = agregarATienda();
-
-alert(
-    "Si la tienda esta vacía, se deben agregar productos desde la sección administrador. Gracias!"
-);
+window.onbeforeunload = agregarATienda();
 
 function agregarATienda() {
+    localStorage.getItem("QuesosEnLS") ||
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Estamos en mantenimiento, pronto estaremos online",
+        });
+
     let listaProductos = JSON.parse(localStorage.getItem("QuesosEnLS"));
     let contenedor = document.getElementById("cards");
     contenedor.innerHTML = "";

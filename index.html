@@ -7,11 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet" />
     <link rel="stylesheet" href="../css/index.css" />
     <title>Venta de quesos</title>
 </head>
 
-<body class="bodyIndex overflow-hidden">
+<body class="bodyIndex">
     <header class="header bg-warning bg-gradient sticky-top">
         <nav class="navbar navbar-expand-md navbar-dark">
             <div class="container-fluid">
@@ -30,7 +31,10 @@
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link text-black" href="./pages/administrador.html"
+                <a
+                  id="administ"
+                  class="nav-link text-black"
+                  href="./pages/administrador.html"
                   >Administrador</a
                 >
               </li>
@@ -43,21 +47,76 @@
         </nav>
     </header>
     <main class="container-fluid mainIndex">
-        <video class="videoFondo" src="./img/fondo/videoFondo.mp4" preload mute autoplay loop></video>
-
-        <div class="row justify-content-center container-fluid">
-            <div class="col-7 col-md-3 colCards">
-                <a href="./pages/tienda.html">
-                    <div href="./pages/tienda.html" class="card cardIndex cardTienda align-middle">
-                        <h3 class="cardTitle">Ir a Tienda</h3>
-                    </div>
-                </a>
-            </div>
+        <section class="forms-section">
+            <div class="forms">
+                <div class="form-wrapper is-active">
+                    <button type="button" class="switcher switcher-login">
+              Ingresar
+              <span class="underline"></span>
+            </button>
+                    <form id="formLogueo" class="form form-login">
+                        <fieldset>
+                            <legend>Ingresá tus datos para loguearte.</legend>
+                            <div class="input-block">
+                                <label for="loginUser">Usuario</label>
+                                <input id="loginUser" type="text" required />
+                            </div>
+                            <div class="input-block">
+                                <label for="loginPassword">Contraseña</label>
+                                <input id="loginPassword" type="password" required />
+                            </div>
+                        </fieldset>
+                        <button type="submit" class="btn-login">Ingresar</button>
+                    </form>
+                </div>
+                <div class="form-wrapper">
+                    <button type="button" class="switcher switcher-signup">
+              Registrarse
+              <span class="underline"></span>
+            </button>
+                    <form id="formRegistro" class="form form-signup">
+                        <fieldset>
+                            <legend>Ingresá la información para registrarte.</legend>
+                            <div class="input-block">
+                                <label for="signupUser">Usuario</label>
+                                <input id="signupUser" type="text" required />
+                            </div>
+                            <div class="input-block">
+                                <label for="signupEmail">E-mail</label>
+                                <input id="signupEmail" type="email" required />
+                            </div>
+                            <div class="input-block">
+                                <label for="signupPassword">Contraseña</label>
+                                <input id="signupPassword" type="password" required />
+                            </div>
+                            <div class="input-block">
+                                <label for="signupPasswordConfirm">Confirmar contraseña</label
+                  >
+                  <input id="signupPasswordConfirm" type="password" required />
+                </div>
+              </fieldset>
+              <button type="submit" class="btnSignup">Continuar</button>
+            </form>
+          </div>
         </div>
+      </section>
+      <video
+        class="videoFondo"
+        src="./img/fondo/videoFondo.mp4"
+        preload
+        mute
+        autoplay
+        loop
+      ></video>
     </main>
     <footer></footer>
+    <script src="./index.js"></script>
     <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-</body>
-
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </body>
 </html>
