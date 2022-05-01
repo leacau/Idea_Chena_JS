@@ -1,19 +1,16 @@
 document.addEventListener("DOMContentLoaded", consultarLogueo());
 
 function consultarLogueo() {
-    if (sessionStorage.getItem("usuarioLogueado") == "true") {
-        let content = document.getElementById("main");
-        content.classList.remove("visually-hidden");
-        tomarBBDD();
-    } else {
+    sessionStorage.getItem("usuarioLogueado") == "true" ?
+        ((content = document.getElementById("main")),
+            content.classList.remove("visually-hidden"),
+            tomarBBDD()) :
         alert("Debes loguearte para usar esta página");
-    }
 }
 
 function tomarBBDD() {
-    let QUESOS = [];
     let listaProductos = JSON.parse(localStorage.getItem("QuesosEnLS"));
-    listaProductos == null ? (QUESOS = []) : ingresarProductoHTML(listaProductos);
+    listaProductos != null && ingresarProductoHTML(listaProductos);
 }
 
 //construcción del producto
@@ -43,20 +40,16 @@ document.getElementById("formulario").addEventListener("submit", (e) => {
     let cantidad = document.getElementById("cantidad2").value;
     let id = `${marca}_${tipo}`;
 
-    QUESOS.push(new Queso(marca, tipo, costo, descrip, cantidad));
-
     if (localStorage.getItem("QuesosEnLS") == null) {
+        QUESOS.push(new Queso(marca, tipo, costo, descrip, cantidad));
         localStorage.setItem("QuesosEnLS", JSON.stringify(QUESOS));
     } else {
         let listaProductos = JSON.parse(localStorage.getItem("QuesosEnLS"));
         let elemento = listaProductos.find((elemento) => elemento.id === id);
         if (elemento == null) {
-            localStorage.setItem("QuesosEnLS", JSON.stringify(QUESOS));
-
-            console.log("Dio NULL");
+            listaProductos.push(new Queso(marca, tipo, costo, descrip, cantidad));
+            localStorage.setItem("QuesosEnLS", JSON.stringify(listaProductos));
         } else {
-            console.log("NO DIO NULL");
-            console.log(elemento.cantidad);
             modificarCantidadProducto(id, parseFloat(cantidad), "QuesosEnLS");
         }
     }
