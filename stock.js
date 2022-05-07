@@ -5,7 +5,16 @@ function consultarLogueo() {
         ((content = document.getElementById("main")),
             content.classList.remove("visually-hidden"),
             tomarBBDD()) :
-        alert("Debes loguearte para usar esta página");
+        Swal.fire({
+            icon: "warning",
+            title: "Oops...",
+            text: "Debes estar logueado para usar esta secciòn",
+            confirmButtonText: "Ir",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location = "../index.html";
+            }
+        });
 }
 
 function tomarBBDD() {
@@ -22,6 +31,7 @@ class Queso {
         this.costo = parseFloat(costo);
         this.descrip = descrip.toUpperCase();
         this.cantidad = parseFloat(cantidad);
+        this.img = `./img/quesos/${marca}/${tipo}.jpg`;
         this.id = `${marca}_${tipo}`;
         this.vendido = false;
     }
@@ -144,4 +154,17 @@ function modificarCantidadProducto(id, cantidadProducto, nombreArreglo) {
         parseFloat(elemento.cantidad) + parseFloat(cantidadProducto);
     elemento.cantidad = cantidadTotal;
     localStorage.setItem(nombreArreglo, JSON.stringify(listaProductos));
+}
+
+function limpiarSessionStorage() {
+    sessionStorage.clear();
+    Swal.fire({
+        icon: "success",
+        title: "Cerraste sesión correctamente",
+        showConfirmButton: true,
+        timer: 1500,
+    });
+    setTimeout(() => {
+        location.reload();
+    }, 1550);
 }

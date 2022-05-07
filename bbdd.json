@@ -1,0 +1,82 @@
+[{
+        "marca": "DON_ANGEL",
+        "tipo": "BURGER",
+        "costo": 324,
+        "descrip": "Al estilo del clásico queso Cheddar inglés, con su característico color intenso, su textura ideal para gratinar en hamburguesas y otros sandwiches.",
+        "cantidad": 2,
+        "img": "../img/quesos/DON_ANGEL/BURGER.jpg",
+        "id": "DON_ANGEL_BURGER"
+    },
+    {
+        "marca": "DON_ANGEL",
+        "tipo": "ARABE",
+        "costo": 1234,
+        "descrip": "Un queso diferente de creación propia, inspirado en los sabores que trajeron a Argentina los inmigrantes árabes. El anís y el orégano le aportan el aroma y sabor característicos de esas tierras.",
+        "cantidad": 3,
+        "img": "../img/quesos/DON_ANGEL/ARABE.jpg",
+        "id": "DON_ANGEL_ARABE"
+    },
+    {
+        "marca": "DON_ANGEL",
+        "tipo": "CANESTRATO",
+        "costo": 4312,
+        "descrip": "Inspirado en recetas italianas. Dejamos madurar estos quesos en pequeñas canastas de juncos, de las cuales obtienen su particular forma.",
+        "cantidad": 2,
+        "img": "../img/quesos/DON_ANGEL/CANESTRATO.jpg",
+        "id": "DON_ANGEL_CANESTRATO"
+    },
+    {
+        "marca": "DON_ANGEL",
+        "tipo": "AZUL",
+        "costo": 3223,
+        "descrip": "Queso que se obtiene por maduración de la cuajada de la leche una vez eliminado el suero. De sabor fuerte y aromatico.",
+        "cantidad": 2,
+        "img": "../img/quesos/DON_ANGEL/AZUL.jpg",
+        "id": "DON_ANGEL_AZUL"
+    },
+    {
+        "marca": "DON_ANGEL",
+        "tipo": "MORBIER",
+        "costo": 3423,
+        "descrip": "Queso tradicional de Francia que se caracteriza por su exquisitez y por la fina capa de cenizas que separa horizontalmente a la pasta.",
+        "cantidad": 2,
+        "img": "../img/quesos/DON_ANGEL/MORBIER.jpg",
+        "id": "DON_ANGEL_MORBIER"
+    },
+    {
+        "marca": "DON_ANGEL",
+        "tipo": "MARMOLADO",
+        "costo": 1234,
+        "descrip": "En este intervienen dos tipos de quesos semiduros incluso con distintos sabores, predominando el rojizo conferido por el pimentón ahumado.",
+        "cantidad": 2,
+        "img": "../img/quesos/DON_ANGEL/MARMOLADO.jpg",
+        "id": "DON_ANGEL_MARMOLADO"
+    },
+    {
+        "marca": "DON_ANGEL",
+        "tipo": "TYBO",
+        "costo": 4342,
+        "descrip": "Es el queso ideal para el feteado en maquinas y acompañante ideal en sándwichs.",
+        "cantidad": 2,
+        "img": "../img/quesos/DON_ANGEL/TYBO.jpg",
+        "id": "DON_ANGEL_TYBO"
+    },
+    {
+        "marca": "DON_ANGEL",
+        "tipo": "SARDO",
+        "costo": 314,
+        "descrip": "Su sabor y su textura son lo que cierran con broche de oro la exquisitez en tus pastas.",
+        "cantidad": 3,
+        "img": "../img/quesos/DON_ANGEL/SARDO.jpg",
+        "id": "DON_ANGEL_SARDO"
+    },
+    {
+        "marca": "DON_ANGEL",
+        "tipo": "FONTINA",
+        "costo": 523,
+        "descrip": "Queso graso de humedad intermedia que se obtiene por coagulación de la leche por medio del cuajo y/u otras enzimas coagulantes apropiadas",
+        "cantidad": 4,
+        "img": "../img/quesos/DON_ANGEL/FONTINA.jpg",
+        "id": "DON_ANGEL_FONTINA"
+    }
+]

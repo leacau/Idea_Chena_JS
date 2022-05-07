@@ -106,3 +106,16 @@ document.getElementById("formLogueo").addEventListener("submit", (e) => {
         }
     }
 });
+
+function limpiarSessionStorage() {
+    sessionStorage.clear();
+    Swal.fire({
+        icon: "success",
+        title: "Cerraste sesión correctamente",
+        showConfirmButton: true,
+        timer: 1500,
+    });
+    setTimeout(() => {
+        location.reload();
+    }, 5000);
+}
