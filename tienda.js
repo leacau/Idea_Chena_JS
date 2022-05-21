@@ -14,7 +14,6 @@ function agregarATiendaDeJson() {
     fetch("../bbdd.json")
         .then((response) => response.json())
         .then((data) => {
-            console.log(data.quesos);
             localStorage.setItem("QuesosEnLS", JSON.stringify(data.quesos));
             for (let i = 0; i < data.quesos.length; i++) {
                 let tipo = data.quesos[i].tipo;

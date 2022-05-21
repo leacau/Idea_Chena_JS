@@ -1,4 +1,17 @@
-window.onwaiting = "";
+window.onwaiting = verCarrito();
+
+function verCarrito() {
+    let CARRO = JSON.parse(localStorage.getItem("CarroEnLS"));
+    if (CARRO != null) {
+        let find = CARRO.find(
+            (element) => element.user === sessionStorage.usuarioLogueado
+        );
+        if (find != null) {
+            let botonCarr = document.getElementById("modalCarr");
+            botonCarr.classList.remove("visually-hidden");
+        }
+    }
+}
 
 function Carrito(user, marca, tipo, costo) {
     class quesoCarro {
@@ -8,7 +21,7 @@ function Carrito(user, marca, tipo, costo) {
             this.tipo = tipo.toUpperCase();
             this.costo = parseFloat(costo);
             this.cantidad = parseInt(cantidad);
-            this.img = `./img/quesos/${marca}/MINI/${tipo}_mini.jpg`;
+            this.img = `/img/quesos/${marca}/MINI/${tipo}_mini.jpg`;
             this.id = `${marca}_${tipo}`;
             this.vendido = true;
         }
@@ -18,6 +31,13 @@ function Carrito(user, marca, tipo, costo) {
         const CARRO = [];
         CARRO.push(new quesoCarro(user, marca, tipo, costo, 1));
         localStorage.setItem("CarroEnLS", JSON.stringify(CARRO));
+        Swal.fire({
+            icon: "success",
+            title: "Producto agregado!",
+            showConfirmButton: false,
+            timer: 1000,
+        });
+        verCarrito();
     } else {
         let quesosDeUser = CARRO.filter(
             (elemento) => elemento.user === sessionStorage.usuarioLogueado
@@ -34,42 +54,19 @@ function Carrito(user, marca, tipo, costo) {
                 localStorage.setItem("CarroEnLS", JSON.stringify(CARRO));
             } else {
                 let totalItem = buscarItemRep.cantidad + 1;
-                let indexa = parseInt(quesosDeUser.indexOf(buscarItemRep));
+                let indexa = parseInt(CARRO.indexOf(buscarItemRep));
                 CARRO.splice(indexa, 1);
                 CARRO.push(new quesoCarro(user, marca, tipo, costo, totalItem));
                 localStorage.setItem("CarroEnLS", JSON.stringify(CARRO));
             }
-            localStorage.setItem("CarroEnLS", JSON.stringify(CARRO));
-        }
-        console.log(CARRO);
-        let carritoUser = CARRO.filter(
-            (elemento) => elemento.user === sessionStorage.usuarioLogueado
-        );
-        if (carritoUser === undefined) {
-            console.log("no hay productos en el carro");
-        } else {
-            let contenedorModal = document.getElementById("carritoBody");
-            console.log(contenedorModal);
-            contenedorModal.innerHTML = "";
-            console.log(carritoUser);
-            for (let i = 0; i < carritoUser.length; i++) {
-                let tipoM = carritoUser[i].tipo;
-                let cantM = carritoUser[i].cantidad;
-                let srcM = carritoUser[i].img;
-                console.log(carritoUser[i].img);
-                contenedorModal.innerHTML += `
-        <div class="col-8 col-sm-6 col-md-4 m-0 p-0 colTiendaCard" data-aos="fade-right">
-                <div id="" class="card m-3 p-0 tiendaCard">
-                    <figure class="imagenes">
-                        <img src="${srcM}" alt="foto de un queso ${tipoM}" />
-                            <figcaption>
-                                 <h5>${tipoM}</h5>
-                                 <h5>${cantM}</h5>
-                             </figcaption>
-                    </figure>
-                </div>
-        </div>`;
-            }
+            Swal.fire({
+                icon: "success",
+                title: "Producto agregado!",
+                showConfirmButton: false,
+                timer: 1000,
+            });
+            crearCarrito();
+            verCarrito();
         }
     }
 }
@@ -104,3 +101,48 @@ contenedor.addEventListener("click", (e) => {
         }
     }
 });
+
+function crearCarrito() {
+    let CARRO = JSON.parse(localStorage.getItem("CarroEnLS"));
+    let carritoUser = CARRO.filter(
+        (elemento) => elemento.user === sessionStorage.usuarioLogueado
+    );
+    if (carritoUser === undefined) {
+        console.log("no hay productos en el carro");
+    } else {
+        let contenedorModal = document.getElementById("carritoBody");
+        contenedorModal.innerHTML = "";
+        for (let i = 0; i < carritoUser.length; i++) {
+            let tipoM = carritoUser[i].tipo;
+            let marcaM = carritoUser[i].marca;
+            let cantM = carritoUser[i].cantidad;
+            let srcM = carritoUser[i].img;
+            let costoM = carritoUser[i].costo * cantM;
+            costoM += costoM;
+            contenedorModal.innerHTML += `
+<div class="row m-0 p-0">
+        <div class="m-0 p-0 col-2">
+            <img src="${srcM}" class="img-fluid p-0 m-0 w-100 h-auto" alt="foto de un queso ${tipoM}"/>
+        </div>
+        <div class="col-5">
+        ${marcaM} - ${tipoM}
+        </div>
+        <div class="col-2">
+        Cantidad: ${cantM}
+        </div>
+        <div class="col-2">
+        Valor: $${costoM}
+        </div>
+</div>`;
+        }
+    }
+}
+
+function limpiarCarro() {
+    let CARRO = JSON.parse(localStorage.getItem("CarroEnLS"));
+    let carritoUser = CARRO.filter(
+        (elemento) => elemento.user === sessionStorage.usuarioLogueado
+    );
+    carritoUser.splice(0);
+    crearCarrito();
+}
