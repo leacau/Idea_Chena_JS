@@ -13,6 +13,16 @@ function verCarrito() {
     }
 }
 
+function agregado() {
+    Swal.fire({
+        icon: "success",
+        title: "Producto agregado!",
+        showConfirmButton: false,
+        timer: 1000,
+    });
+    verCarrito();
+}
+
 function Carrito(user, marca, tipo, costo) {
     class quesoCarro {
         constructor(user, marca, tipo, costo, cantidad) {
@@ -31,13 +41,7 @@ function Carrito(user, marca, tipo, costo) {
         const CARRO = [];
         CARRO.push(new quesoCarro(user, marca, tipo, costo, 1));
         localStorage.setItem("CarroEnLS", JSON.stringify(CARRO));
-        Swal.fire({
-            icon: "success",
-            title: "Producto agregado!",
-            showConfirmButton: false,
-            timer: 1000,
-        });
-        verCarrito();
+        agregado();
     } else {
         let quesosDeUser = CARRO.filter(
             (elemento) => elemento.user === sessionStorage.usuarioLogueado
@@ -59,14 +63,8 @@ function Carrito(user, marca, tipo, costo) {
                 CARRO.push(new quesoCarro(user, marca, tipo, costo, totalItem));
                 localStorage.setItem("CarroEnLS", JSON.stringify(CARRO));
             }
-            Swal.fire({
-                icon: "success",
-                title: "Producto agregado!",
-                showConfirmButton: false,
-                timer: 1000,
-            });
             crearCarrito();
-            verCarrito();
+            agregado();
         }
     }
 }
