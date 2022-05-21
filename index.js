@@ -8,7 +8,19 @@ switchers.forEach((item) => {
         this.parentElement.classList.add("is-active");
     });
 });
-
+//meter usuario admin del json a localstorage para que funcione la logica de la pagina de administrador
+fetch("../bbdd.json")
+    .then((response) => response.json())
+    .then((data) => {
+        let USUARIOS = JSON.parse(localStorage.getItem("UsuariosLS"));
+        if (USUARIOS == null) {
+            localStorage.setItem("UsuariosLS", JSON.stringify(data.usuarios));
+        } else {
+            USUARIOS.push(
+                new Usuario(data.usuarios.user, data.usuarios.pass, data.usuarios.mail)
+            );
+        }
+    });
 //definicion de class usuarios y de array USUARIOS
 class Usuario {
     constructor(user, pass, mail) {
@@ -21,11 +33,11 @@ const USUARIOS = [];
 
 document.getElementById("formRegistro").addEventListener("submit", (e) => {
     e.preventDefault();
-    let listaUsuarios = JSON.parse(localStorage.getItem("UsuariosLS"));
+    let USUARIOS = JSON.parse(localStorage.getItem("UsuariosLS"));
     let user = document.getElementById("signupUser").value;
     let mail = document.getElementById("signupEmail").value;
     let pass = document.getElementById("signupPassword").value;
-    if (listaUsuarios == null) {
+    if (USUARIOS == null) {
         if (
             document.getElementById("signupPassword").value !=
             document.getElementById("signupPasswordConfirm").value
@@ -42,8 +54,8 @@ document.getElementById("formRegistro").addEventListener("submit", (e) => {
             document.getElementById("formRegistro").reset();
         }
     } else {
-        let elemento1 = listaUsuarios.find((elemento) => elemento.user === user);
-        let elemento2 = listaUsuarios.find((elemento) => elemento.mail === mail);
+        let elemento1 = USUARIOS.find((elemento) => elemento.user === user);
+        let elemento2 = USUARIOS.find((elemento) => elemento.mail === mail);
         if (elemento1 != null) {
             Swal.fire({
                 icon: "error",
@@ -76,46 +88,45 @@ document.getElementById("formRegistro").addEventListener("submit", (e) => {
 
 document.getElementById("formLogueo").addEventListener("submit", (e) => {
     e.preventDefault();
-    let listaUsuarios = JSON.parse(localStorage.getItem("UsuariosLS"));
-    if (listaUsuarios == null) {
+    let USUARIOS = JSON.parse(localStorage.getItem("UsuariosLS"));
+    if (USUARIOS == null) {
         Swal.fire({
             icon: "error",
             title: "Oops...",
             text: "Aún no hay usuarios registrados",
         });
     } else {
-        let user2 = document.getElementById("loginUser").value;
-        let pass2 = document.getElementById("loginPassword").value;
-        let elemento = listaUsuarios.find((elemento) => elemento.user === user2);
-        if (elemento == null) {
+        if (
+            sessionStorage.usuarioLogueado != "" &&
+            sessionStorage.usuarioLogueado != undefined
+        ) {
             Swal.fire({
-                icon: "error",
+                icon: "info",
                 title: "Oops...",
-                text: "Nombre de usuario inexistente!",
+                text: "Ya hay un usuario logueado",
             });
-        } else if (elemento.pass != pass2) {
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Contraseña incorrecta!",
-            });
+            console.log(sessionStorage.usuarioLogueado);
         } else {
-            Swal.fire("Genia!", "Ingresaste con éxito!", "success");
-            sessionStorage.setItem("usuarioLogueado", true);
-            document.getElementById("formLogueo").reset();
+            let user2 = document.getElementById("loginUser").value;
+            let pass2 = document.getElementById("loginPassword").value;
+            let elemento = USUARIOS.find((elemento) => elemento.user === user2);
+            if (elemento == null) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Nombre de usuario inexistente!",
+                });
+            } else if (elemento.pass != pass2) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Contraseña incorrecta!",
+                });
+            } else {
+                Swal.fire("Genia!", "Ingresaste con éxito!", "success");
+                sessionStorage.setItem("usuarioLogueado", `${user2}`);
+                document.getElementById("formLogueo").reset();
+            }
         }
     }
 });
-
-function limpiarSessionStorage() {
-    sessionStorage.clear();
-    Swal.fire({
-        icon: "success",
-        title: "Cerraste sesión correctamente",
-        showConfirmButton: true,
-        timer: 1500,
-    });
-    setTimeout(() => {
-        location.reload();
-    }, 5000);
-}

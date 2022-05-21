@@ -1,14 +1,14 @@
 document.addEventListener("DOMContentLoaded", consultarLogueo());
 
 function consultarLogueo() {
-    sessionStorage.getItem("usuarioLogueado") == "true" ?
+    sessionStorage.usuarioLogueado == "admin" ?
         ((content = document.getElementById("main")),
             content.classList.remove("visually-hidden"),
             tomarBBDD()) :
         Swal.fire({
             icon: "warning",
             title: "Oops...",
-            text: "Debes estar logueado para usar esta secciòn",
+            text: "Debes estar logueado como administrador para usar esta sección (user: admin / pass: admin)",
             confirmButtonText: "Ir",
         }).then((result) => {
             if (result.isConfirmed) {
@@ -50,7 +50,8 @@ document.getElementById("formulario").addEventListener("submit", (e) => {
     let cantidad = document.getElementById("cantidad2").value;
     let id = `${marca}_${tipo}`;
 
-    if (localStorage.getItem("QuesosEnLS") == null) {
+    if (localStorage.getItem("QuesosEnLS") === null) {
+        console.log(localStorage.getItem("QuesosEnLS"));
         QUESOS.push(new Queso(marca, tipo, costo, descrip, cantidad));
         localStorage.setItem("QuesosEnLS", JSON.stringify(QUESOS));
     } else {
@@ -108,7 +109,6 @@ function modificarProducto(i) {
         let id = listaProductos[i].id;
         let producto = listaProductos.find((elemento) => elemento.id === `${id}`);
         let contenedor = document.getElementById(`${id}`);
-        contenedor.innerHTML = "";
 
         let marca = listaProductos[i].marca;
         let tipo = listaProductos[i].tipo;
@@ -129,6 +129,7 @@ function modificarProducto(i) {
         producto.descrip = descrip;
 
         localStorage.removeItem("QuesosEnLS");
+        ingresarProductoHTML(listaProductos);
 
         QUESOS.splice(i, 1);
     }
@@ -154,17 +155,4 @@ function modificarCantidadProducto(id, cantidadProducto, nombreArreglo) {
         parseFloat(elemento.cantidad) + parseFloat(cantidadProducto);
     elemento.cantidad = cantidadTotal;
     localStorage.setItem(nombreArreglo, JSON.stringify(listaProductos));
-}
-
-function limpiarSessionStorage() {
-    sessionStorage.clear();
-    Swal.fire({
-        icon: "success",
-        title: "Cerraste sesión correctamente",
-        showConfirmButton: true,
-        timer: 1500,
-    });
-    setTimeout(() => {
-        location.reload();
-    }, 1550);
 }
