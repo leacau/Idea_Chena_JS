@@ -1,13 +1,6 @@
 window.onwaiting = agregarATiendaDeJson();
 
 function agregarATiendaDeJson() {
-    localStorage.getItem("QuesosEnLS") ||
-        Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Estamos en mantenimiento, pronto estaremos online",
-        });
-
     let contenedor = document.getElementById("cards");
     contenedor.innerHTML = "";
 

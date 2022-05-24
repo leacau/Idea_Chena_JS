@@ -51,7 +51,6 @@ document.getElementById("formulario").addEventListener("submit", (e) => {
     let id = `${marca}_${tipo}`;
 
     if (localStorage.getItem("QuesosEnLS") === null) {
-        console.log(localStorage.getItem("QuesosEnLS"));
         QUESOS.push(new Queso(marca, tipo, costo, descrip, cantidad));
         localStorage.setItem("QuesosEnLS", JSON.stringify(QUESOS));
     } else {
@@ -87,14 +86,14 @@ function ingresarProductoHTML(arreglo) {
             <td id="tipo" class="bg-light">${tipo}</td>
             <td id="costo" class="bg-light">${costo}</td>
             <td id="cantidad" class="bg-light">${cantidad}</td>
-            <td class="bg-light"><button class="btn btn-warning" onClick="modificarProducto(${i})"><img src="../img/botones/edit.png"alt=""/></button></td>
+            <td class="bg-light"><button class="btn btn-warning" onClick="modificarProducto(${id})"><img src="../img/botones/edit.png"alt=""/></button></td>
             <td class = "bg-light"><button class="btn btn-danger" onClick="eliminarProducto(${i})"><img src="../img/botones/delete.png" alt=""/></button></td>
         </tr>
         `;
     }
 }
 
-function modificarProducto(i) {
+function modificarProducto(a) {
     if (
         document.getElementById("cantidad2").value != "" ||
         document.getElementById("costo2").value != ""
@@ -106,32 +105,28 @@ function modificarProducto(i) {
         });
     } else {
         let listaProductos = JSON.parse(localStorage.getItem("QuesosEnLS"));
-        let id = listaProductos[i].id;
-        let producto = listaProductos.find((elemento) => elemento.id === `${id}`);
-        let contenedor = document.getElementById(`${id}`);
-
-        let marca = listaProductos[i].marca;
-        let tipo = listaProductos[i].tipo;
-        let costo = listaProductos[i].costo;
-        let cantidad = listaProductos[i].cantidad;
-        let descrip = listaProductos[i].descrip;
-
+        let producto = listaProductos.find((elemento) => elemento.id === a.id);
+        let noProducto = listaProductos.filter((elemento)=> elemento.id != a.id);
+        let id = a.id;
+        let indexProd = parseInt(listaProductos.indexOf(producto));
+        
+        let marca = producto.marca;
+        let tipo = producto.tipo;
+        let costo = producto.costo;
+        let cantidad = producto.cantidad;
+        let descrip = producto.descrip;
+       
         document.getElementById("marca2").value = marca;
         document.getElementById("tipo2").value = tipo;
         document.getElementById("costo2").value = costo;
         document.getElementById("cantidad2").value = cantidad;
         document.getElementById("descrip2").value = descrip;
 
-        producto.marca = marca;
-        producto.tipo = tipo;
-        producto.costo = costo;
-        producto.cantidad = cantidad;
-        producto.descrip = descrip;
-
-        localStorage.removeItem("QuesosEnLS");
+        listaProductos.splice(indexProd,1);
         ingresarProductoHTML(listaProductos);
+        localStorage.removeItem("QuesosEnLS");
+        localStorage.setItem("QuesosEnLS", JSON.stringify(listaProductos));
 
-        QUESOS.splice(i, 1);
     }
 }
 

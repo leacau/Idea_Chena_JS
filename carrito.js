@@ -62,6 +62,8 @@ function Carrito(user, marca, tipo, costo) {
                 CARRO.splice(indexa, 1);
                 CARRO.push(new quesoCarro(user, marca, tipo, costo, totalItem));
                 localStorage.setItem("CarroEnLS", JSON.stringify(CARRO));
+                console.log(CARRO);
+
             }
             crearCarrito();
             agregado();
@@ -108,6 +110,9 @@ function crearCarrito() {
     if (carritoUser === undefined) {
         console.log("no hay productos en el carro");
     } else {
+        const pedido = [];
+        let suma = 0;
+        let mensaje = "";
         let contenedorModal = document.getElementById("carritoBody");
         contenedorModal.innerHTML = "";
         for (let i = 0; i < carritoUser.length; i++) {
@@ -116,31 +121,59 @@ function crearCarrito() {
             let cantM = carritoUser[i].cantidad;
             let srcM = carritoUser[i].img;
             let costoM = carritoUser[i].costo * cantM;
-            costoM += costoM;
+            suma = suma + costoM;
+            
+            let itemPedido = {
+                    "marca":`${marcaM}`, 
+                    "tipo":`${tipoM}`,
+                    "cantidad":`${cantM}`,
+                    "costo":`${costoM}`,
+                }
+            pedido.push(itemPedido);
+            
             contenedorModal.innerHTML += `
-<div class="row m-0 p-0">
-        <div class="m-0 p-0 col-2">
-            <img src="${srcM}" class="img-fluid p-0 m-0 w-100 h-auto" alt="foto de un queso ${tipoM}"/>
-        </div>
-        <div class="col-5">
-        ${marcaM} - ${tipoM}
-        </div>
-        <div class="col-2">
-        Cantidad: ${cantM}
-        </div>
-        <div class="col-2">
-        Valor: $${costoM}
-        </div>
-</div>`;
-        }
-    }
+            <div class="row m-0 p-0  border-bottom border-2">
+                <div class="m-0 p-0 col-2">
+                    <img src="${srcM}" class="img-fluid p-0 m-0 w-100 h-auto" alt="foto de un queso ${tipoM}"/>
+                </div>
+                <div class="col-5">${marcaM} - ${tipoM}</div>
+                <div class="col-2">Cantidad: ${cantM}</div>
+                <div class="col-2">Valor: $${costoM}</div>
+            </div>`;
+        
+                
+            mensaje += `%0AQueso ${marcaM} - ${tipoM}\n
+            Cantidad: ${cantM}\n
+            Precio: $${costoM}\n`
+            let finalMsj =""
+            finalMsj += `%0A*Total Final: $${suma}*%0A`
+
+            let whatsapp = mensaje + finalMsj
+            ;
+        
+
+        let footerModal = document.getElementById("modalFooter");
+        footerModal.innerHTML=""
+        footerModal.innerHTML+=`
+        <div class="m-0 p-0 text-end align-text-top text-bg-info text-black">Total: $${suma}</div>
+        <br>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerra</button>
+        <button type="button" class="btn btn-primary" onclick="limpiarCarro()">Limpiar carrito</button>
+        <a href="https://api.whatsapp.com/send?phone=5493425051513&text=Hola, hice el siguiente pedido desde la web:
+        ${whatsapp}" target="_blank"><button type="button" class="btn btn-primary">Enviar Pedido </button></a>
+        `
+        }     
+    }   
 }
 
 function limpiarCarro() {
     let CARRO = JSON.parse(localStorage.getItem("CarroEnLS"));
-    let carritoUser = CARRO.filter(
-        (elemento) => elemento.user === sessionStorage.usuarioLogueado
+    let carritoLimpio = CARRO.filter(
+        (elemento) => elemento.user != sessionStorage.usuarioLogueado
     );
-    carritoUser.splice(0);
-    crearCarrito();
+    localStorage.removeItem("CarroEnLS");
+    CARRO = carritoLimpio;
+    localStorage.setItem("CarroEnLS", JSON.stringify(CARRO));
+   location.reload();
 }
+console.log(document.querySelector("#carritoBody").value);
